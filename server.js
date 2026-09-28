@@ -77,7 +77,7 @@ function handlePing(users, username, offer) {
 		};
 	} else {
 		if (!exists || !users[username].offer) {
-			return { error: "bad" };
+			return { error: "badPing" };
 		}
 		users[username].lastSeen = now;
 	}
@@ -92,14 +92,14 @@ function handlePing(users, username, offer) {
 }
 
 function handleProvideAnswer(users, target, answer) {
-	if (!users[target]) return { error: "bad" };
+	if (!users[target]) return { error: "badAnswer" };
 	users[target].answer = answer;
 	return { users };
 }
 
 function handleGetOffer(users, target) {
 	if (!users[target] || !users[target].offer) {
-		return { error: "bad" };
+		return { error: "badOffer" };
 	}
 	return { offer: users[target].offer };
 }
