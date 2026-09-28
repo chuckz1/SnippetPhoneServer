@@ -11,7 +11,10 @@ const cors = require("cors");
 // Secure CORS: only allow your production domain
 app.use(
 	cors({
-		origin: "https://snippetphone.fehringerfarms.com",
+		origin: [
+			"https://snippetphone.fehringerfarms.com",
+			"https://chuckz1.github.io",
+		],
 		methods: ["GET"],
 		allowedHeaders: ["Content-Type"],
 		optionsSuccessStatus: 200,
