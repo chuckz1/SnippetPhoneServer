@@ -2,24 +2,26 @@
 const express = require("express");
 const app = express();
 
-// // Enable CORS for all routes
-// const cors = require("cors");
-// app.use(cors());
-
+const ALLOW_OPEN_CORS = process.env.ALLOW_OPEN_CORS === "true";
 const cors = require("cors");
 
-// Secure CORS: only allow your production domain
-app.use(
-	cors({
-		origin: [
-			"https://snippetphone.fehringerfarms.com",
-			"https://chuckz1.github.io",
-		],
-		methods: ["GET"],
-		allowedHeaders: ["Content-Type"],
-		optionsSuccessStatus: 200,
-	}),
-);
+if (ALLOW_OPEN_CORS) {
+	// Enable CORS for all routes
+	app.use(cors());
+} else {
+	// Secure CORS: only allow your production domain
+	app.use(
+		cors({
+			origin: [
+				"https://snippetphone.fehringerfarms.com",
+				"https://chuckz1.github.io",
+			],
+			methods: ["GET"],
+			allowedHeaders: ["Content-Type"],
+			optionsSuccessStatus: 200,
+		}),
+	);
+}
 
 // Parse query strings and JSON bodies
 app.use(express.json());
